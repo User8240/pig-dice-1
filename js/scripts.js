@@ -46,53 +46,30 @@ function toggleButtons(){
   }
 }
 
-$("#player1Turn").click(function() {
-  player1.turn(die);
-  $("#rollValue").append(player1.turn(die))
-});
-$("#player1Hold").click(function() {
-  player1.hold();
-});
-
 $(document).ready(function() {
-  let player1 = new Player("");
-  let player2 = new Player("");
-  console.log(player1.name);
-  console.log(player2.name);
+  let player1;
+  let player2;
+  let die = new Die(6);
   $("form#new-player-1").submit(function(event) {
     event.preventDefault();
     const player1Name = $("input#player-1-name").val();
-    player1.name = player1Name;
+    player1 = new Player(player1Name);
+    console.log(player1.name);
   });
   $("form#new-player-2").submit(function(event) {
     event.preventDefault();
     const player2Name = $("input#player-2-name").val();
-    player2.name = player2Name;
+    player2 = new Player(player2Name);
+    console.log(player2.name)
   });
-  console.log(player1.name);
-  console.log(player2.name);
+  $("#player1Turn").click(function() {
+    console.log(10)
+    player1.turn(die);
+    $("#rollValue").append(player1.turn(die))
+  });
+  $("#player1Hold").click(function() {
+    player1.hold();
+  });
 });
-
-//Ex:|| Movie-Tickets
-// $('#howmuch-button').click(function(event) {
-//   event.preventDefault();
-//   const ticket = getTicket();
-//   // print in ticketReturn the price and the msg
-//   $('#ticket-price').text("$ " + ticket.priceMsg[0]);
-//   $('#ticket-price-msg').text(ticket.priceMsg[1]);
-//   $('.ticketReturn').toggle();
-//   // enable ticket buy button
-//   $('#buy-button').removeAttr('disabled');
-// });
-// $('form#ticketForm').submit(function(event) {
-//   event.preventDefault();
-//   const ticket = getTicket();
-//   ticketsSold.addTicket(ticket);
-//   attachSoldTickets(ticket);
-//   // clear fields and disable ticket buy button
-//   $('#buy-button').prop('disabled', true);
-//   clearTicketInformation();
-// });
-// });
 
 
