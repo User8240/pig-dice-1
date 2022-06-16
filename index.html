@@ -13,7 +13,8 @@
     <div class="row">
       <div class="col-md-6">
         <hr>
-        <h2>Player 1:</h2>
+        <!-- NEW: Add a class to this h2, so when a player inputs their name it'll change to the players name -->
+        <h2 id="player-1-new-name">Player 1:</h2>
         <form id="new-player-1">
           <div class="form-group">
             <label for="player-1-name">Name:</label>
@@ -21,21 +22,30 @@
           </div>
           <button type="submit" class="btn-add-p1-name">Add name</button>
         </form>
-        <button id="#player1Hold">Hold</button>
-        <button id="#player1Turn">Roll</button>
+        <!-- NEW: Deleted hashtags from id names -->
+        <button id="player1Hold">Hold</button>
+        <button id="player1Turn">Roll</button> 
+        <p class="totalScoreP1"></p>       
       </div>
       <div class="col-md-6">
         <hr>
-        <h2>Player 2</h2>
+        <!-- NEW: Add a class to this h2, so when a player inputs their name it'll change to the players name -->
+        <h2 id="player-2-new-name">Player 2</h2>
         <form id="new-player-2">
           <div class="form-group">
             <label for="player-2-name">Name:</label>            
             <input type="text"  class="form-control" id="player-2-name">
           </div>
           <button type="submit" class="btn-add-p2-name">Add name</button>
-          <button id="#player2Hold">Hold</button>
-          <button id="#player2Turn">Roll</button>
         </form>
+        <!-- NEW: Deleted hashtags from id names -->
+        <button id="player2Hold">Hold</button>
+        <button id="player2Turn">Roll</button>
+        <p class="totalScoreP2"></p>   
+      </div>
+      <div class="col-md-12">
+        <!-- NEW: Column that displays all the current rolls for the turn -->
+        <p class="rollValue"></p>
       </div>
     </div>
   </div>
