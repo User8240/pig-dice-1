@@ -3,11 +3,17 @@ function Die(sides){
   this.sides = sides;
 }
 
+// let die1 = new Die(6);
+// let die2 = new Die(20);
+
 // Method that Die objects can use. Gets a random number based on the sides value of the Die then returns that random number
 Die.prototype.roll = function(){
   roll = Math.floor(Math.random() * this.sides) + 1;
   return roll;
 };
+
+// let rollValue = die1.roll()
+// let rollValue2 = die2.roll()
 
 // Player Object Constructer with a name parameter.  this.name is set the the name passed as an argument.  The scores start at 0 because they will be modified later and don't need an initial value. 
 function Player(name){
@@ -16,11 +22,20 @@ function Player(name){
   this.totalScore = 0;
 }
 
+// let newPlayer = new Player("Frank");
+
+// newPlayer {
+//   name: Frank
+//   turnScore: 0
+//   totalScore: 0
+// }
+
 // Method that Player objects can use to roll a dice.  If the dice roll is 1, it will set the turn score to 0, and force the player to hold. Otherwise, it'll add the dice roll to current turnScore.
 Player.prototype.turn = function(die){
   let dieRoll = die.roll();
   //NEW: add a die roll key to the player, so we can access and display it on every roll.
   this.dieRoll = dieRoll;
+  //
   if(dieRoll != 1){
     this.turnScore += dieRoll;
   }else{
@@ -29,22 +44,53 @@ Player.prototype.turn = function(die){
   }
 };
 
+// newPlayer.turn(die1)
+
+// newPlayer {
+//   name: Frank
+//   turnScore: 6
+//   totalScore: 0
+//   dieRoll: 6
+// }
+
 // Method that Player objects can use that will add the current turnScore to the totalScore.  It will also reset the turn score to 0, so it starts from 0 on the next turn. Also calls the toggleButtons function, by doing so it will essentially end the current players turn.
 Player.prototype.hold = function(){
   this.totalScore += this.turnScore;
   this.turnScore = 0;
   toggleButtons();
+  if (this.totalScore > 100){
+    let playerName = this.name; 
+    console.log(playerName);
+    win(playerName);
+  }
 };
+
+//newPlayer.hold()
+
+// newPlayer {
+//   name: Frank
+//   turnScore: 0
+//   totalScore: 6
+//   dieRoll: 6
+// }
 
 //UI logic
 
-// Function that disables the currently active player buttons when called, and activates the other players buttons.  We will want to do this to change turns. Game should always start with player2 disabled.
+function win(name){
+  console.log(name);
+  let winnerName = name;
+  $(".winner").show();
+  $(".winnerName").text(winnerName);
+}
+
+// Function that disables the currently active player buttons when called, and activates the other players buttons.  We will want to do this to change turns.
 function toggleButtons(){
   //NEW: Getting the button element by its ID and convert into a variable
   let player1BTN = document.getElementById('player1Hold');
   let player2BTN = document.getElementById('player2Hold');
   //NEW: Clear the rollValue <p> when the turn ends so it will reset and start to take the next players roll values.
   $(".rollValue").text("");
+  $(".turnValue").text("");
   //UPDATED: Checking if the player 1 buttons are NOT disabled.
   if (player1BTN.disabled == false){
     // If player 1 buttons are NOT disabled, disable them and activate player 2 buttons
@@ -85,48 +131,51 @@ $(document).ready(function() {
     $("form#new-player-1").hide();
     //NEW: Change player 1 header in html to show the players name.
     $("#player-1-new-name").text(player1.name + ":");
-
   });
-  
+
   $("form#new-player-2").submit(function(event) {
     event.preventDefault();
     //When player2 submits a name, convert the player1 variable to a Player Object with that name passed as an argument.
     const player2Name = $("input#player-2-name").val();
     player2 = new Player(player2Name);
-    //NEW: Enable player 2 buttons, hide form, and hide submit button.
-    $('#player2Hold').prop('disabled', false);
-    $('#player2Turn').prop('disabled', false);
+    //NEW: Hide form, and hide submit button.
     $("form#new-player-2").hide();
     //NEW: Change player 2 header in html to show the players name
     $("#player-2-new-name").text(player2.name + ":");
-  });
 
-  $("#player1Turn").click(function() {
-    //Call turn on player1 with the 6 sided die
-    player1.turn(die);
-    //NEW: Append the die roll value to the rollValue <p> in the html if it isn't 1
-    if (player1.dieRoll != 1){
-      $(".rollValue").append(player1.dieRoll + " ");
-    }
-  });
-
-  $("#player1Hold").click(function() {
-    //NEW: Call the hold function on player1, then output the text into the totalScoreP1 <p>
-    player1.hold();
-    $(".totalScoreP1").text(player1.totalScore);
-  });
-
-  $("#player2Turn").click(function() {
-    //Call turn on player2 with the 6 sided die
-    player2.turn(die);
-    //NEW: Append the die roll value to the rollValue <p> in the html if it isn't 1
-    if (player2.dieRoll != 1){
-      $(".rollValue").append(player2.dieRoll + " ");
-    }
-  });
-
-  $("#player2Hold").click(function() {
-    player2.hold();
-    $(".totalScoreP2").text(player2.totalScore);
+    $("#player1Turn").click(function() {
+      //Call turn on player1 with the 6 sided die
+      player1.turn(die);
+      //NEW: Append the die roll value to the rollValue <p> in the html if it isn't 1
+      if (player1.dieRoll != 1){
+        $(".rollValue").append(player1.dieRoll + " ");
+      }
+      if (player1.turnScore != 0){
+        $(".turnValue").text(player1.turnScore);
+      }
+    });
+  
+    $("#player1Hold").click(function() {
+      //NEW: Call the hold function on player1, then output the text into the totalScoreP1 <p>
+      player1.hold();
+      $(".totalScoreP1").text(player1.totalScore);
+    });
+  
+    $("#player2Turn").click(function() {
+      //Call turn on player2 with the 6 sided die
+      player2.turn(die);
+      //NEW: Append the die roll value to the rollValue <p> in the html if it isn't 1
+      if (player2.dieRoll != 1){
+        $(".rollValue").append(player2.dieRoll + " ");
+      }
+      if (player2.turnScore != 0){
+        $(".turnValue").text(player2.turnScore);
+      }
+    });
+  
+    $("#player2Hold").click(function() {
+      player2.hold();
+      $(".totalScoreP2").text(player2.totalScore);
+    });
   });
 });
