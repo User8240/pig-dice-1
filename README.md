@@ -1,3 +1,37 @@
+# _Pig Dice_
+
+#### By _**Grace Kostanich & Frank Timmons**_
+
+#### _A webpage allowing two users to play the game "Pice Dice"_
+
+## Technologies Used
+
+* _HTML_
+* _CSS_
+* _JS_
+
+## Description
+
+_This is a webpage written in HTML using Bootstrap CSS for styling & JavaScript for functionality._
+
+## Setup/Installation Requirements
+
+* _Fork project to your own GitHub repository_ 
+* _Clone that repository to your desktop_
+* _Open index.html or view any files you'd like!_
+
+## Known Bugs
+
+* _No known issues_
+
+## License
+
+_none_
+
+Copyright (c) _6/15/2022_ _Grace Kostanich & Frank Timmons_
+
+## Tests
+
 Describe Die.prototype.roll():
 
 **Test:** "It will generate a random number based on the amount of sides of the die it's called on"  
@@ -5,7 +39,7 @@ Code:
 die1 = new Die(6);  
 rollValue = die1.roll();  
 Expected Output: rollValue; (_any # 1 - 6_) 
-
+  
 Describe Player.prototype.turn():
 
 **Test:** "It will add every dice roll's value to the players turn score and output the turn score total"  
@@ -33,7 +67,6 @@ player1 = new Player("Frank");
 player1.turn(die); _This roll will be 1_ 
 console.log(activePlayer);
 Expected Output: 
-
 
 Describe Player.prototype.hold():
 
