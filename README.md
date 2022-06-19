@@ -2,7 +2,7 @@
 
 #### By _**Grace Kostanich & Frank Timmons**_
 
-#### _A webpage allowing two users to play the game "Pice Dice"_
+#### _A webpage allowing two users to play the game "Pig Dice"_
 
 ## Technologies Used
 
