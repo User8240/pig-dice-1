@@ -30,6 +30,8 @@ _none_
 
 Copyright (c) _6/15/2022_ _Grace Kostanich & Frank Timmons_
 
+----------------------------------------------------------------------
+
 ## Tests
 
 Describe Die.prototype.roll():
